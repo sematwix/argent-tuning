@@ -2,8 +2,8 @@
 title: Выхлопные системы
 order: 2
 short: Звук, который нравится вам, а не соседям по парковке.
-image: "/assets/uploads/vyhlop.jpg"
-price: от 400 000 ₸
+image: /assets/uploads/vyhlop.jpg
+price: от 490 000 ₸
 duration: 1–3 дня
 includes:
   - Подбор системы и запись звука до установки
