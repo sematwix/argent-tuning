@@ -3,7 +3,7 @@ title: Чип-тюнинг
 order: 1
 short: Stage 1 и Stage 2 с замером на стенде до и после.
 image: /assets/uploads/chip-tuning.jpg
-price: от 250 000 ₸
+price: от 260 000 ₸
 duration: 1 день
 includes:
   - Диагностика и замер мощности на диностенде
