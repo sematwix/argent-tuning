@@ -1,0 +1,28 @@
+{# Фото проекта. Параметры: item (data проекта), lmSizes.
+   Есть фото «до» (imageBefore) — слайдер «до/после»; нет — просто фото «после» с подписью модели. #}
+{%- set lbl %}{% if item.image %}<span class="ph__lbl lm__lbl" aria-hidden="true"><span>{{ item.brand }} ·</span> <span>{{ item.model }}</span></span>{% endif %}{% endset -%}
+{% if item.imageBefore and item.image %}
+<div class="lm" data-compare style="--pos:50%">
+  <div class="lm__layer lm__after">
+    <img src="{{ item.image }}" alt="{{ item.title }} после работ" sizes="{{ lmSizes or '100vw' }}" draggable="false">
+  </div>
+  <div class="lm__layer lm__before">
+    <img src="{{ item.imageBefore }}" alt="{{ item.title }} до работ" sizes="{{ lmSizes or '100vw' }}" draggable="false">
+  </div>
+  <span class="lm__tag lm__tag--before" aria-hidden="true">До</span>
+  <span class="lm__tag lm__tag--after" aria-hidden="true">После</span>
+  <span class="lm__line" aria-hidden="true"></span>
+  <span class="lm__knob glass glass--blur" role="slider" tabindex="0" aria-label="Сравнить до и после" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50%" data-compare-knob>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </span>
+  {{ lbl | safe }}
+</div>
+{% else %}
+<div class="lm lm--plain">
+  <div class="lm__layer">
+    {% if item.image %}<img src="{{ item.image }}" alt="{{ item.title }}" sizes="{{ lmSizes or '100vw' }}">
+    {% else %}{% set phLabel = item.brand + " · заглушка" %}{% include "partials/ph.njk" %}{% endif %}
+  </div>
+  {{ lbl | safe }}
+</div>
+{% endif %}

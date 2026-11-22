@@ -1,0 +1,11 @@
+<a class="scard glass-edge" href="{{ s.url }}">
+  <div class="scard__media">
+    {% if s.data.image %}<img src="{{ s.data.image }}" alt="{{ s.data.title }}" sizes="(max-width: 768px) 85vw, 33vw">{% else %}{% set phLabel = s.data.title %}{% include "partials/ph.njk" %}{% endif %}
+  </div>
+  <div class="scard__body">
+    <span class="scard__n">{{ loop.index | pad }}</span>
+    <h3 class="scard__t">{{ s.data.title }}</h3>
+    <p class="scard__d">{{ s.data.short }}</p>
+    <span class="scard__more">{{ s.data.price }} <i aria-hidden="true">→</i></span>
+  </div>
+</a>

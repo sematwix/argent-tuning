@@ -1,0 +1,5 @@
+<dialog class="modal glass glass--blur" data-modal aria-label="Запись на консультацию">
+  <button class="modal__close" type="button" aria-label="Закрыть" data-close-modal>×</button>
+  {% set formName = "konsultaciya" %}{% set formTitle = "Запись на консультацию" %}{% set formNote = "Перезвоним в течение 15 минут в рабочее время." %}{% set presetService = "" %}
+  {% include "partials/form.njk" %}
+</dialog>

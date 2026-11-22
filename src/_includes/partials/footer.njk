@@ -1,0 +1,25 @@
+<footer class="ftr">
+  <div class="wrap ftr__in">
+    <div class="ftr__brand">{{ site.name }}</div>
+    <div class="ftr__cols">
+      <div>
+        <p class="ftr__h">Контакты</p>
+        <a href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
+        <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      </div>
+      <div>
+        <p class="ftr__h">Адрес</p>
+        <p>{{ site.address }}</p>
+        <p>{{ site.hours }}</p>
+      </div>
+      <div>
+        <p class="ftr__h">Разделы</p>
+        <a href="/uslugi/">Услуги</a>
+        <a href="/portfolio/">Портфолио</a>
+        <a href="/#contacts">Контакты</a>
+      </div>
+    </div>
+    <p class="ftr__copy">© {% year %} {{ site.name }}{% if site.demo %} · демо-проект, контакты условные{% endif %}</p>
+  </div>
+</footer>

@@ -1,0 +1,147 @@
+---
+layout: layouts/base.njk
+bodyClass: is-home
+---
+<section class="hero" data-hero>
+  {# Телефон: студийный софтбокс и световой конус занимают свободное место над машиной #}
+  <div class="hero__ceiling" aria-hidden="true"><span class="hero__softbox"></span></div>
+  <div class="hero__stage" data-hero-stage>
+    {%- set H = home.heroSet %}
+    <div class="hero__bg">
+      {% if H %}
+      <picture>
+        <source media="(max-width: 767px)" srcset="{{ H }}bg-mobile.webp" width="2400" height="1709">
+        <img src="{{ H }}bg-desktop.webp" srcset="{{ H }}bg-desktop-1920.webp 1920w, {{ H }}bg-desktop.webp 3840w" sizes="max(100vw, 177.8vh)" width="3840" height="2160" alt="" fetchpriority="high" loading="eager" decoding="async" eleventy:ignore>
+      </picture>
+      {% else %}
+      <div class="hero__ph" aria-hidden="true"><span class="hero__ph-light"></span><span class="hero__ph-floor"></span><span class="hero__ph-lbl">Заглушка · здесь будет студийное фото машины 16:9</span></div>
+      {% endif %}
+    </div>
+    <h1 class="hero__title" data-hero-title aria-label="{{ site.name }} — тюнинг-ателье в Алматы">
+      {%- for ch in home.heroTitle | list %}<span class="hero__ch" aria-hidden="true"><span style="--i:{{ loop.index0 }};--n:{{ home.heroTitle | length }}">{{ ch }}</span></span>{% endfor -%}
+    </h1>
+    {% if H %}
+    {# Машина без фона стоит перед заголовком. Слои: кузов с выключенными фарами → свет фар → ореол → серебристый блик #}
+    <div class="hero__car" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 767px)" srcset="{{ H }}car-mobile.webp">
+        <img src="{{ H }}car-desktop.webp" srcset="{{ H }}car-desktop-1920.webp 1920w, {{ H }}car-desktop.webp 3840w" sizes="max(100vw, 177.8vh)" width="3840" height="2160" alt="" loading="eager" decoding="async" eleventy:ignore>
+      </picture>
+      <span class="hero__lights" data-hero-lights>
+        <picture>
+          <source media="(max-width: 767px)" srcset="{{ H }}lights-mobile.webp">
+          <img src="{{ H }}lights-desktop.webp" srcset="{{ H }}lights-desktop-1920.webp 1920w, {{ H }}lights-desktop.webp 3840w" sizes="max(100vw, 177.8vh)" alt="" loading="eager" decoding="async" eleventy:ignore>
+        </picture>
+      </span>
+    </div>
+    {% endif %}
+    <span class="hero__vignette" aria-hidden="true"></span>
+  </div>
+  <span class="hero__dark" data-hero-dark aria-hidden="true"></span>
+  <div class="hero__ui wrap">
+    <div class="hero__left" data-hero-ui>
+      <p class="hero__line">{{ home.heroLine }}</p>
+      <button class="btn btn--white btn--lg" type="button" data-open-modal>Записаться</button>
+    </div>
+    <ul class="hero__promises glass glass--blur" data-hero-ui>
+      {% for p in home.promises %}<li><b>{{ p.title }}</b><span>{{ p.text }}</span></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec__head">
+      <h2 class="h2" data-reveal>Услуги</h2>
+      <a class="link" href="/uslugi/">Все услуги →</a>
+    </div>
+  </div>
+  <div class="scards" data-swipe>
+    {% for s in collections.services %}{% include "partials/service-card.njk" %}{% endfor %}
+  </div>
+</section>
+
+<section class="sec" id="portfolio">
+  <div class="wrap">
+    <div class="sec__head">
+      <h2 class="h2" data-reveal>Портфолио</h2>
+      <a class="link" href="/portfolio/">Все проекты →</a>
+    </div>
+    <div class="pcards">
+      {% for p in collections.projects %}{% include "partials/project-card.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec about" id="about">
+  <div class="wrap about__in">
+    <h2 class="h2" data-reveal>{{ home.aboutTitle }}</h2>
+    <div>
+      <p class="about__text" data-reveal>{{ home.aboutText }}</p>
+      <dl class="about__nums">
+        {% for n in home.numbers %}<div data-reveal><dt>{{ n.value }}</dt><dd>{{ n.label }}</dd></div>{% endfor %}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="reviews">
+  <div class="wrap">
+    <h2 class="h2" data-reveal>Отзывы</h2>
+    <div class="reviews" data-swipe>
+      {% for r in reviews.items %}
+      <figure class="review glass-edge" data-reveal>
+        <blockquote>{{ r.text }}</blockquote>
+        <figcaption><b>{{ r.name }}</b><span>{{ r.car }}</span></figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="zapis">
+  <div class="wrap">
+    <div class="formblock glass">
+      {% set formName = "zayavka" %}{% set formTitle = "Рассчитаем ваш проект" %}{% set formNote = "Оставьте телефон — пришлём смету и свободные даты в WhatsApp." %}{% set presetService = "" %}
+      {% include "partials/form.njk" %}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contacts">
+  <div class="wrap contacts">
+    <div class="contacts__info">
+      <h2 class="h2" data-reveal>Контакты</h2>
+      <a class="contacts__phone" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
+      <div class="contacts__btns">
+        <a class="btn btn--silver" href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <button class="btn btn--glass" type="button" data-open-modal>Записаться</button>
+      </div>
+      <p>{{ site.address }}</p>
+      <p class="muted">{{ site.hours }}</p>
+      <a class="link" href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </div>
+    <div class="contacts__map glass-edge" id="map2gis" data-map data-lat="{{ site.map.lat }}" data-lon="{{ site.map.lon }}" data-zoom="{{ site.map.zoom }}" data-key="{{ site.map.key }}">
+      <div class="contacts__map-ph">
+        <span class="contacts__pin" aria-hidden="true"></span>
+        <p class="contacts__map-addr">{{ site.address }}</p>
+        <a class="btn btn--glass" href="https://2gis.kz/almaty/geo/{{ site.map.lon }},{{ site.map.lat }}" target="_blank" rel="noopener">Открыть в 2ГИС</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "{{ site.fullName }}",
+  "description": "{{ site.description }}",
+  "url": "{{ site.url }}",
+  "telephone": "{{ site.phone }}",
+  "email": "{{ site.email }}",
+  "address": { "@type": "PostalAddress", "addressLocality": "Алматы", "addressCountry": "KZ", "streetAddress": "{{ site.address }}" },
+  "geo": { "@type": "GeoCoordinates", "latitude": {{ site.map.lat }}, "longitude": {{ site.map.lon }} },
+  "openingHours": "Mo-Su 10:00-20:00"
+}
+</script>

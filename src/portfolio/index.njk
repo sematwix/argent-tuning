@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+tags: []
+permalink: /portfolio/
+title: Портфолио
+description: Проекты тюнинг-ателье ARGENT в Алматы — машины, список работ и результат.
+---
+<section class="page-head wrap">
+  <h1 class="h1" data-reveal>Портфолио</h1>
+  <p class="page-head__line" data-reveal>Нажмите «Включить свет», чтобы увидеть машину после работ.</p>
+</section>
+<section class="sec sec--tight">
+  <div class="wrap pcards">
+    {% for p in collections.projects %}{% include "partials/project-card.njk" %}{% endfor %}
+  </div>
+</section>
+{% include "partials/cta.njk" %}

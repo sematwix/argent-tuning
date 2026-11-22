@@ -1,0 +1,21 @@
+{
+  "name": "ARGENT",
+  "fullName": "ARGENT — тюнинг-ателье",
+  "url": "https://argentuning.netlify.app",
+  "city": "Алматы",
+  "description": "Тюнинг-ателье в Алматы: чип-тюнинг, выхлопные системы, защитная плёнка, подвеска, салон и карбон. Под ключ, с гарантией и фотоотчётом.",
+  "phone": "+7 (700) 000-00-00",
+  "whatsapp": "77000000000",
+  "email": "hello@argent.kz",
+  "address": "Алматы, ул. Примерная, 1",
+  "hours": "Ежедневно 10:00–20:00",
+  "instagram": "https://instagram.com/",
+  "map": {
+    "lat": 43.238949,
+    "lon": 76.889709,
+    "zoom": 15,
+    "key": ""
+  },
+  "metrikaId": "",
+  "demo": true
+}

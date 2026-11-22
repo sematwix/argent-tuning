@@ -1,0 +1,36 @@
+{# Параметры: formName, formTitle, formNote, presetService #}
+<form class="lead" name="{{ formName }}" method="POST" action="/spasibo/" data-netlify="true" netlify-honeypot="bot-field" data-lead-form>
+  <input type="hidden" name="form-name" value="{{ formName }}">
+  <p class="lead__hp"><label>Не заполняйте <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+  <h3 class="lead__title">{{ formTitle }}</h3>
+  {% if formNote %}<p class="lead__note">{{ formNote }}</p>{% endif %}
+  <div class="lead__grid">
+    <label class="fld">
+      <input type="text" name="name" placeholder=" " autocomplete="name" required>
+      <span>Имя</span>
+    </label>
+    <label class="fld">
+      <input type="tel" name="phone" placeholder=" " autocomplete="tel" inputmode="tel" required data-phone>
+      <span>Телефон</span>
+    </label>
+    <label class="fld">
+      <input type="text" name="car" placeholder=" " autocomplete="off">
+      <span>Машина <em>— необязательно</em></span>
+    </label>
+    <label class="fld fld--select">
+      <select name="service">
+        <option value="" {% if not presetService %}selected{% endif %}>Пока не знаю — подскажите</option>
+        {%- for s in collections.services %}
+        <option value="{{ s.data.title }}" {% if presetService == s.data.title %}selected{% endif %}>{{ s.data.title }}</option>
+        {%- endfor %}
+      </select>
+      <span>Услуга</span>
+    </label>
+  </div>
+  <label class="lead__agree"><input type="checkbox" name="agree" required checked> Согласен на обработку персональных данных</label>
+  <button class="btn btn--silver lead__btn" type="submit">Отправить заявку</button>
+  <div class="lead__done" role="status" aria-live="polite" hidden>
+    <p class="lead__done-t">Заявка принята</p>
+    <p>Свяжемся с вами в ближайшее время.</p>
+  </div>
+</form>

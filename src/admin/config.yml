@@ -1,0 +1,113 @@
+# Decap CMS — админка для владельца: /admin/
+# Вход: Netlify Identity + Git Gateway (включить в настройках сайта на Netlify).
+# Локально: `npm run cms` в отдельном терминале, затем http://localhost:8080/admin/
+backend:
+  name: git-gateway
+  branch: main
+local_backend: true
+locale: ru
+site_url: https://argentuning.netlify.app
+media_folder: src/assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: services
+    label: Услуги
+    label_singular: Услуга
+    folder: src/uslugi
+    extension: md
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Название, name: title, widget: string }
+      - { label: Порядок, name: order, widget: number, value_type: int, default: 10 }
+      - { label: Короткое описание (для карточки), name: short, widget: string }
+      - { label: Фото, name: image, widget: image, required: false }
+      - { label: Стоимость, name: price, widget: string }
+      - { label: Срок, name: duration, widget: string }
+      - { label: Что входит, name: includes, widget: list, field: { label: Пункт, name: item, widget: string } }
+      - { label: Подробный текст, name: body, widget: markdown }
+
+  - name: projects
+    label: Портфолио
+    label_singular: Проект
+    folder: src/portfolio
+    extension: md
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Название, name: title, widget: string }
+      - { label: Марка, name: brand, widget: string }
+      - { label: Модель, name: model, widget: string }
+      - { label: Год, name: year, widget: number, value_type: int }
+      - { label: Порядок, name: order, widget: number, value_type: int, default: 10 }
+      - { label: Фото «после», name: image, widget: image, required: false }
+      - { label: Фото «до» (необязательно — иначе эффект строится на фото «после»), name: imageBefore, widget: image, required: false }
+      - { label: Галерея, name: gallery, widget: list, required: false, field: { label: Фото, name: photo, widget: image } }
+      - { label: Список работ, name: works, widget: list, field: { label: Работа, name: item, widget: string } }
+      - { label: Результат одной строкой, name: result, widget: string, required: false }
+      - { label: Описание проекта, name: body, widget: markdown }
+
+  - name: settings
+    label: Тексты и настройки
+    files:
+      - name: home
+        label: Главная страница
+        file: src/_data/home.json
+        fields:
+          - { label: Заголовок первого экрана, name: heroTitle, widget: string }
+          - { label: Строка под заголовком, name: heroLine, widget: text }
+          - { label: Папка слоёв первого экрана (меняется разработчиком — фото нужно заново вырезать), name: heroSet, widget: string }
+          - label: Три обещания
+            name: promises
+            widget: list
+            max: 3
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Текст, name: text, widget: string }
+          - { label: Заголовок «О компании», name: aboutTitle, widget: string }
+          - { label: Текст «О компании», name: aboutText, widget: text }
+          - label: Цифры
+            name: numbers
+            widget: list
+            fields:
+              - { label: Значение, name: value, widget: string }
+              - { label: Подпись, name: label, widget: string }
+      - name: reviews
+        label: Отзывы
+        file: src/_data/reviews.json
+        fields:
+          - label: Отзывы
+            name: items
+            widget: list
+            fields:
+              - { label: Имя, name: name, widget: string }
+              - { label: Машина, name: car, widget: string }
+              - { label: Текст, name: text, widget: text }
+      - name: site
+        label: Контакты и Метрика
+        file: src/_data/site.json
+        fields:
+          - { label: Название, name: name, widget: string }
+          - { label: Полное название, name: fullName, widget: string }
+          - { label: Адрес сайта, name: url, widget: string }
+          - { label: Город, name: city, widget: string }
+          - { label: Описание для поисковиков, name: description, widget: text }
+          - { label: Телефон, name: phone, widget: string }
+          - { label: WhatsApp (только цифры, 77001234567), name: whatsapp, widget: string }
+          - { label: Почта, name: email, widget: string }
+          - { label: Адрес, name: address, widget: string }
+          - { label: Часы работы, name: hours, widget: string }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - label: Карта 2ГИС
+            name: map
+            widget: object
+            fields:
+              - { label: Широта, name: lat, widget: number, value_type: float }
+              - { label: Долгота, name: lon, widget: number, value_type: float }
+              - { label: Масштаб, name: zoom, widget: number, value_type: int }
+              - { label: API-ключ 2ГИС (platform.2gis.ru), name: key, widget: string, required: false }
+          - { label: ID счётчика Яндекс Метрики, name: metrikaId, widget: string, required: false }
+          - { label: Демо-режим, name: demo, widget: boolean }

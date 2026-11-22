@@ -1,0 +1,26 @@
+<header class="hdr" data-header>
+  {# Три отдельных стеклянных блока: логотип · меню с телефоном по центру · «Записаться» #}
+  <div class="hdr__row">
+    <a class="hdr__logo glass glass--blur" href="/" aria-label="{{ site.name }} — на главную"><span>{{ site.name }}</span></a>
+    <nav class="hdr__nav glass glass--blur" aria-label="Основное меню">
+      <a href="/uslugi/">Услуги</a>
+      <a href="/portfolio/">Портфолио</a>
+      <a href="/#about">О нас</a>
+      <a href="/#reviews">Отзывы</a>
+      <a href="/#contacts">Контакты</a>
+      <span class="hdr__sep" aria-hidden="true"></span>
+      <a class="hdr__phone" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
+    </nav>
+    <button class="btn btn--white hdr__cta" type="button" data-open-modal>Записаться</button>
+    <button class="hdr__burger glass glass--blur" type="button" aria-label="Открыть меню" aria-expanded="false" data-burger><span></span><span></span></button>
+  </div>
+  <div class="hdr__menu glass glass--blur" data-menu hidden>
+    <a href="/uslugi/">Услуги</a>
+    <a href="/portfolio/">Портфолио</a>
+    <a href="/#about">О нас</a>
+    <a href="/#reviews">Отзывы</a>
+    <a href="/#contacts">Контакты</a>
+    <a class="hdr__menu-phone" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
+    <button class="btn btn--silver" type="button" data-open-modal>Записаться</button>
+  </div>
+</header>

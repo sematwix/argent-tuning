@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+tags: []
+permalink: /uslugi/
+title: Услуги
+description: Чип-тюнинг, выхлоп, защитная плёнка, подвеска, салон и карбон в Алматы — цены и сроки.
+eleventyExcludeFromCollections: false
+---
+<section class="page-head wrap">
+  <h1 class="h1" data-reveal>Услуги</h1>
+  <p class="page-head__line" data-reveal>Шесть направлений, одна команда и одна смета.</p>
+</section>
+<section class="sec sec--tight">
+  <div class="scards scards--grid">
+    {% for s in collections.services %}{% include "partials/service-card.njk" %}{% endfor %}
+  </div>
+</section>
+{% include "partials/cta.njk" %}

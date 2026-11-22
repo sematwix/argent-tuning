@@ -1,0 +1,1 @@
+{ "tags": "service", "layout": "layouts/service.njk", "permalink": "/uslugi/{{ page.fileSlug }}/" }

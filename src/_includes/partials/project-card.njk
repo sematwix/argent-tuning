@@ -1,0 +1,10 @@
+<article class="pcard">
+  {% set item = p.data %}{% set lmSizes = "(max-width: 768px) 100vw, 60vw" %}
+  {% include "partials/light-media.njk" %}
+  <div class="pcard__info">
+    <p class="pcard__brand">{{ p.data.brand }}</p>
+    <h3 class="pcard__t"><a href="{{ p.url }}">{{ p.data.model }}</a></h3>
+    <ul class="pcard__works">{% for w in p.data.works %}<li>{{ w }}</li>{% endfor %}</ul>
+    <a class="btn btn--glass" href="{{ p.url }}">Смотреть проект</a>
+  </div>
+</article>

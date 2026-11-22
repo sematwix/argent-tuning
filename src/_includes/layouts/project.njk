@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+---
+<section class="page-head wrap">
+  <a class="link" href="/portfolio/">← Все проекты</a>
+  <p class="pcard__brand">{{ brand }} · {{ year }}</p>
+  <h1 class="h1" data-reveal>{{ model }}</h1>
+</section>
+<section class="wrap">
+  {% set item = { title: title, brand: brand, model: model, image: image, imageBefore: imageBefore } %}{% set lmSizes = "100vw" %}
+  <div class="project-media">{% include "partials/light-media.njk" %}</div>
+</section>
+<section class="sec sec--tight">
+  <div class="wrap detail">
+    <div>
+      {% if result %}<p class="project__result">{{ result }}</p>{% endif %}
+      <div class="prose" data-reveal>{{ content | safe }}</div>
+    </div>
+    <div class="detail__list glass-edge" data-reveal>
+      <h2 class="h3">Что сделали</h2>
+      <ul>{% for w in works %}<li>{{ w }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  {% if gallery and gallery.length %}
+  <div class="wrap gallery">{% for g in gallery %}<img src="{{ g }}" alt="{{ model }} — фото {{ loop.index }}" sizes="(max-width: 768px) 100vw, 50vw">{% endfor %}</div>
+  {% endif %}
+</section>
+{% set ctaTitle = "Хотите так же?" %}
+{% include "partials/cta.njk" %}

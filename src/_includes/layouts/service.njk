@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+---
+<section class="detail-hero">
+  <div class="detail-hero__media">
+    {% if image %}<img src="{{ image }}" alt="{{ title }}" sizes="100vw" loading="eager">{% else %}{% set phLabel = title %}{% include "partials/ph.njk" %}{% endif %}
+  </div>
+  <div class="wrap detail-hero__in">
+    <a class="link" href="/uslugi/">← Все услуги</a>
+    <h1 class="h1" data-reveal>{{ title }}</h1>
+    <p class="page-head__line" data-reveal>{{ short }}</p>
+    <div class="detail-hero__meta glass glass--blur">
+      <div><span>Стоимость</span><b>{{ price }}</b></div>
+      <div><span>Срок</span><b>{{ duration }}</b></div>
+      <button class="btn btn--silver" type="button" data-open-modal data-service="{{ title }}">Записаться</button>
+    </div>
+  </div>
+</section>
+<section class="sec sec--tight">
+  <div class="wrap detail">
+    <div class="prose" data-reveal>{{ content | safe }}</div>
+    <div class="detail__list glass-edge" data-reveal>
+      <h2 class="h3">Что входит</h2>
+      <ul>{% for i in includes %}<li>{{ i }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+{% set presetService = title %}{% set ctaTitle = "Заявка: " + title %}
+{% include "partials/cta.njk" %}
