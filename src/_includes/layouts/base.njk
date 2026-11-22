@@ -2,7 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <script>document.documentElement.classList.add("js");if(/(invite|recovery|confirmation)_token/.test(location.hash))location.replace("/admin/"+location.hash);</script>
+  <script>document.documentElement.classList.add("js");</script>
+  {#- Ссылки из писем админки (приглашение, сброс пароля) обрабатываем здесь: окно Netlify Identity откроется на этой странице, после входа — в /admin/ #}
+  <script>window.__idToken=/(invite|recovery|confirmation)_token/.test(location.hash);if(__idToken)document.write('<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"><\/script>');</script>
+  <script>if(window.__idToken&&window.netlifyIdentity)netlifyIdentity.on("login",function(){location.href="/admin/"});</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   {%- set pageTitle = (title + " — " + site.name + ", тюнинг в Алматы") if title else (site.fullName + " в Алматы") %}
   {%- set pageDesc = description or short or site.description %}
