@@ -11,6 +11,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
   eleventyConfig.addPassthroughCopy({ "src/assets/img": "assets/img" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
   eleventyConfig.addPassthroughCopy({ "src/assets/uploads": "assets/uploads" });
   eleventyConfig.addPassthroughCopy({ "src/admin/config.yml": "admin/config.yml" });
   eleventyConfig.addPassthroughCopy({

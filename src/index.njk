@@ -10,7 +10,7 @@ bodyClass: is-home
     <div class="hero__bg">
       {% if H %}
       <picture>
-        <source media="(max-width: 767px)" srcset="{{ H }}bg-mobile.webp" width="2400" height="1709">
+        <source media="(max-width: 767px)" srcset="{{ H }}bg-mobile-1200.webp 1200w, {{ H }}bg-mobile.webp 2400w" sizes="100vw" width="2400" height="1709">
         <img src="{{ H }}bg-desktop.webp" srcset="{{ H }}bg-desktop-1920.webp 1920w, {{ H }}bg-desktop.webp 3840w" sizes="max(100vw, 177.8vh)" width="3840" height="2160" alt="" fetchpriority="high" loading="eager" decoding="async" eleventy:ignore>
       </picture>
       {% else %}
@@ -24,12 +24,12 @@ bodyClass: is-home
     {# Машина без фона стоит перед заголовком. Слои: кузов с выключенными фарами → свет фар → ореол → серебристый блик #}
     <div class="hero__car" aria-hidden="true">
       <picture>
-        <source media="(max-width: 767px)" srcset="{{ H }}car-mobile.webp">
+        <source media="(max-width: 767px)" srcset="{{ H }}car-mobile-1200.webp 1200w, {{ H }}car-mobile.webp 2400w" sizes="100vw">
         <img src="{{ H }}car-desktop.webp" srcset="{{ H }}car-desktop-1920.webp 1920w, {{ H }}car-desktop.webp 3840w" sizes="max(100vw, 177.8vh)" width="3840" height="2160" alt="" loading="eager" decoding="async" eleventy:ignore>
       </picture>
       <span class="hero__lights" data-hero-lights>
         <picture>
-          <source media="(max-width: 767px)" srcset="{{ H }}lights-mobile.webp">
+          <source media="(max-width: 767px)" srcset="{{ H }}lights-mobile-1200.webp 1200w, {{ H }}lights-mobile.webp 2400w" sizes="100vw">
           <img src="{{ H }}lights-desktop.webp" srcset="{{ H }}lights-desktop-1920.webp 1920w, {{ H }}lights-desktop.webp 3840w" sizes="max(100vw, 177.8vh)" alt="" loading="eager" decoding="async" eleventy:ignore>
         </picture>
       </span>
