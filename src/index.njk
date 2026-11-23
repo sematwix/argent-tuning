@@ -121,12 +121,14 @@ bodyClass: is-home
       <p class="muted">{{ site.hours }}</p>
       <a class="link" href="mailto:{{ site.email }}">{{ site.email }}</a>
     </div>
-    <div class="contacts__map glass-edge" id="map2gis" data-map data-lat="{{ site.map.lat }}" data-lon="{{ site.map.lon }}" data-zoom="{{ site.map.zoom }}" data-key="{{ site.map.key }}">
+    {#- Карта: Яндекс (тёмная тема, без ключа) грузится, только когда до неё доскроллили. Если в настройках указан ключ 2ГИС — вместо неё 2ГИС. #}
+    <div class="contacts__map glass-edge" id="map" data-map data-lat="{{ site.map.lat }}" data-lon="{{ site.map.lon }}" data-zoom="{{ site.map.zoom }}" data-key="{{ site.map.key }}">
       <div class="contacts__map-ph">
         <span class="contacts__pin" aria-hidden="true"></span>
         <p class="contacts__map-addr">{{ site.address }}</p>
-        <a class="btn btn--glass" href="https://2gis.kz/almaty/geo/{{ site.map.lon }},{{ site.map.lat }}" target="_blank" rel="noopener">Открыть в 2ГИС</a>
       </div>
+      <button class="contacts__map-lock" type="button" data-map-unlock hidden><span>Нажмите, чтобы двигать карту</span></button>
+      <a class="btn btn--glass contacts__map-2gis" href="https://2gis.kz/almaty/geo/{{ site.map.lon }},{{ site.map.lat }}" target="_blank" rel="noopener">Маршрут в 2ГИС</a>
     </div>
   </div>
 </section>

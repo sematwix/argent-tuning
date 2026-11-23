@@ -233,10 +233,35 @@
     }
   });
 
-  /* ---------- Карта 2ГИС: грузим, только когда до неё доскроллили ---------- */
+  /* ---------- Карта: грузим, только когда до неё доскроллили ---------- */
   const map = $("[data-map]");
+  const whenNear = (el, fn) => {
+    if (!("IntersectionObserver" in window)) return fn();
+    const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { io.disconnect(); fn(); } }, { rootMargin: "400px" });
+    io.observe(el);
+  };
+  if (map && !map.dataset.key) {
+    // Яндекс Карты: встраиваемый виджет, тёмная тема, ключ не нужен
+    whenNear(map, () => {
+      const { lat, lon, zoom } = map.dataset;
+      const f = document.createElement("iframe");
+      f.className = "contacts__map-frame";
+      f.title = "Карта: как к нам проехать";
+      f.loading = "lazy";
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      f.src = `https://yandex.kz/map-widget/v1/?ll=${lon}%2C${lat}&z=${zoom}&pt=${lon}%2C${lat}%2Cpm2wtm&theme=dark&lang=ru_RU`;
+      f.addEventListener("load", () => map.classList.add("is-loaded"), { once: true });
+      map.prepend(f);
+      // На телефоне карта не перехватывает прокрутку страницы, пока по ней не нажали
+      const lock = $("[data-map-unlock]", map);
+      if (matchMedia("(pointer: coarse)").matches && lock) {
+        lock.hidden = false;
+        lock.addEventListener("click", () => { lock.hidden = true; });
+      }
+    });
+  }
   if (map && map.dataset.key) {
-    // 2ГИС Maps API 2.0 — бесплатно, без ключа
+    // 2ГИС Maps API 2.0 — нужен ключ (указывается в админке → Настройки сайта)
     const load = () => {
       const { lat, lon, zoom } = map.dataset;
       const s = document.createElement("script");
