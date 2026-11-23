@@ -2,8 +2,79 @@
   command = "npm run build"
   publish = "_site"
 
+# ---------- Безопасность: заголовки для всех страниц ----------
+# HTTPS (HSTS) Netlify включает сам.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Сайт нельзя встроить в чужую страницу (защита от кликджекинга)
+    X-Frame-Options = "SAMEORIGIN"
+    # Ссылки, отправка форм и <base> — только на свой домен; плагины запрещены
+    Content-Security-Policy = "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+    # Браузер не угадывает тип файла (нельзя выдать картинку за скрипт)
+    X-Content-Type-Options = "nosniff"
+    # Чужим сайтам уходит только домен, без полного адреса страницы
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Сайту не нужны камера, микрофон, геолокация и платежи — запрещаем
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+
+# Админка: не индексировать и не кешировать (правки видны сразу)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
 # Оптимизированные картинки с хешем в имени — кешируем навсегда
 [[headers]]
   for = "/img/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# ---------- Перенаправления (301 — навсегда, поисковики переносят вес) ----------
+# Привычные адреса на английском и старые варианты ведут на русские разделы
+[[redirects]]
+  from = "/services/*"
+  to = "/uslugi/:splat"
+  status = 301
+[[redirects]]
+  from = "/services"
+  to = "/uslugi/"
+  status = 301
+[[redirects]]
+  from = "/works/*"
+  to = "/portfolio/:splat"
+  status = 301
+[[redirects]]
+  from = "/projects/*"
+  to = "/portfolio/:splat"
+  status = 301
+[[redirects]]
+  from = "/about"
+  to = "/#about"
+  status = 301
+[[redirects]]
+  from = "/contacts"
+  to = "/#contacts"
+  status = 301
+[[redirects]]
+  from = "/kontakty"
+  to = "/#contacts"
+  status = 301
+[[redirects]]
+  from = "/reviews"
+  to = "/#reviews"
+  status = 301
+[[redirects]]
+  from = "/thanks"
+  to = "/spasibo/"
+  status = 301
+
+# Когда подключим домен клиента — раскомментировать: технический адрес netlify.app
+# перенаправится на основной домен, чтобы в поиске был один адрес.
+# [[redirects]]
+#   from = "https://argentuning.netlify.app/*"
+#   to = "https://ДОМЕН.kz/:splat"
+#   status = 301
+#   force = true
