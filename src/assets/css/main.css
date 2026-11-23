@@ -667,3 +667,6 @@ html:not(.js) .hero__ch > span { transform: none; }
 .contacts__map-lock { position: absolute; z-index: 2; inset: 0; border: 0; padding: 0; background: rgba(8,8,10,.35); display: grid; place-items: center; cursor: pointer; }
 .contacts__map-lock[hidden] { display: none; }
 .contacts__map-lock span { padding: 10px 16px; border-radius: var(--r-pill); background: rgba(10,10,12,.7); color: #fff; font-size: 14px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+/* Ошибка из серверной проверки формы */
+.fld__err { display: block; margin-top: 6px; font-size: 13px; color: #ff9b9b; }
+.lead__agree .fld__err { display: inline; margin-left: 8px; }

@@ -315,15 +315,38 @@
       }
       if (!form.reportValidity()) return;
       const btn = $("button[type=submit]", form);
+      const label = btn.textContent;
       btn.disabled = true;
       btn.textContent = "Отправляем…";
+      $$(".is-invalid", form).forEach((el) => el.classList.remove("is-invalid"));
+      $$(".fld__err", form).forEach((el) => el.remove());
       try {
         if (!isLocal) {
-          const res = await fetch("/", {
+          // Сначала серверная проверка (/api/lead), она же сохраняет заявку и шлёт её в Telegram
+          const body = new URLSearchParams(new FormData(form));
+          body.set("page", location.pathname);
+          const res = await fetch("/api/lead", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(new FormData(form)).toString(),
+            body: body.toString(),
           });
+          if (res.status === 422) {
+            // Сервер нашёл ошибки — подсвечиваем поля и не отправляем
+            const { errors = {} } = await res.json().catch(() => ({}));
+            Object.entries(errors).forEach(([name, msg]) => {
+              const inp = form.elements[name];
+              if (!inp) return;
+              inp.classList.add("is-invalid");
+              const err = document.createElement("small");
+              err.className = "fld__err";
+              err.textContent = msg;
+              (inp.closest(".fld") || inp.closest("label") || inp.parentElement).append(err);
+            });
+            form.querySelector(".is-invalid")?.focus();
+            btn.disabled = false;
+            btn.textContent = label;
+            return;
+          }
           if (!res.ok) throw new Error(res.status);
         }
         const id = document.body.dataset.metrika;
